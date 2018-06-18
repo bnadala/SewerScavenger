@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.MonsterDetails">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Name" FontSize="Medium" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+            <Button Text="Go Back" Clicked="Cancel_Clicked" Grid.Row="0" Grid.Column="2"/>
+            
+            <Image Source="{Binding Data.Image}" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand"/>
+
+            <Label Text="Description:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="{Binding Data.Description}" FontSize="Small" Grid.Row="3" Grid.ColumnSpan="3"/>
+
+            <!--Display the current Health, Attack, Defense, and Speed-->
+            <Label Text="Level:" FontSize="Small" Grid.Row="5" Grid.Column="1"/>
+            <Label Text="{Binding Data.Level}" FontSize="Small" Grid.Row="5" Grid.Column="2"/>
+            <Label Text="Health:" FontSize="Small" Grid.Row="6" Grid.Column="1"/>
+            <Label Text="{Binding Data.Health}" FontSize="Small" Grid.Row="6" Grid.Column="2"/>
+            <Label Text="Attack:" FontSize="Small" Grid.Row="7" Grid.Column="1"/>
+            <Label Text="{Binding Data.Attack}" FontSize="Small" Grid.Row="7" Grid.Column="2"/>
+            <Label Text="Defense:" FontSize="Small" Grid.Row="8" Grid.Column="1"/>
+            <Label Text="{Binding Data.Defense}" FontSize="Small" Grid.Row="8" Grid.Column="2"/>
+            <Label Text="Speed:" FontSize="Small" Grid.Row="9" Grid.Column="1"/>
+            <Label Text="{Binding Data.Speed}" FontSize="Small" Grid.Row="9" Grid.Column="2"/>
+
+            <!--Added in Move, Range, and Damage-->
+            <Label Text="Move:" FontSize="Small" Grid.Row="10" Grid.Column="1"/>
+            <Label Text="{Binding Data.Move}" FontSize="Small" Grid.Row="10" Grid.Column="2"/>
+            <Label Text="Range:" FontSize="Small" Grid.Row="11" Grid.Column="1"/>
+            <Label Text="{Binding Data.Range}" FontSize="Small" Grid.Row="11" Grid.Column="2"/>
+            <Label Text="Damage:" FontSize="Small" Grid.Row="12" Grid.Column="1"/>
+            <Label Text="{Binding Data.Damage}" FontSize="Small" Grid.Row="12" Grid.Column="2"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

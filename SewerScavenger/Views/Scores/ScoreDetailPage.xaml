@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.ScoreDetailPage"
+             Title="{Binding Title}">
+    
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Game Score" FontSize="Small" HorizontalOptions="Center"/>
+                <!--Show Delete button in the toolbar-->
+                <Button Text="Delete Score" Clicked="Delete_Clicked"/>
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--Define the grid row and column dimensions-->
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--Display the name-->
+                <Label Text="Name: " FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+
+                <!--Display the score-->
+                <Label Text="Score: " FontSize="Small" Grid.Row="1" Grid.Column="0"/>
+                <Label Text="{Binding Data.ScoreTotal}" FontSize="Small" Grid.Row="1" Grid.Column="1"/>
+
+                <!--Display the game date-->
+                <Label Text="Game Date:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding Data.GameDate}" FontSize="Small" Grid.Row="2" Grid.Column="1"/>
+
+                <!--Display whether the game was auto battle or not-->
+                <Label Text="AutoBattle:" FontSize="Small" Grid.Row="3" Grid.Column="0"/>
+                <Label Text="{Binding Data.AutoBattle}" FontSize="Small" Grid.Row="3" Grid.Column="1"/>
+
+                <!--Display the number of turns until game over-->
+                <Label Text="Number of Turns:" FontSize="Small" Grid.Row="4" Grid.Column="0"/>
+                <Label Text="{Binding Data.TurnNumber}" FontSize="Small" Grid.Row="4" Grid.Column="1"/>
+
+                <!--Display the number of monsters slain-->
+                <Label Text="Number of Monsters Slain:" FontSize="Small" Grid.Row="5" Grid.Column="0"/>
+                <Label Text="{Binding Data.MonsterSlainNumber}" FontSize="Small" Grid.Row="5" Grid.Column="1"/>
+
+                <!--Display the total experience earned-->
+                <Label Text="Total Experience Gained:" FontSize="Small" Grid.Row="6" Grid.Column="0"/>
+                <Label Text="{Binding Data.ExperienceGainedTotal}" FontSize="Small" Grid.Row="6" Grid.Column="1"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="300" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Display the list of characters at death-->
+                <Label Text="Characters at Death:" FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+                <ScrollView Grid.Row="1" Grid.Column="0">
+                    <Label Text="{Binding Data.CharacterAtDeathList}" FontSize="Small"/>
+                </ScrollView>
+
+                <!--Display the list of monsters killed-->
+                <Label Text="Monsters Killed:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+                <ScrollView Grid.Row="3" Grid.Column="0">
+                    <Label Text="{Binding Data.MonstersKilledList}" FontSize="Small"/>
+                </ScrollView>
+
+                <!--Display the list of items dropped-->
+                <Label Text="Items Dropped:" FontSize="Small" Grid.Row="4" Grid.Column="0"/>
+                <ScrollView Grid.Row="5" Grid.Column="0">
+                    <Label Text="{Binding Data.ItemsDroppedList}" FontSize="Small"/>
+                </ScrollView>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

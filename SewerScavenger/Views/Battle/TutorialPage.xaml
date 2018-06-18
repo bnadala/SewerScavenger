@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.TutorialPage"
+             BackgroundImage="sewerBackground.jpg">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Welcome to Sewer Scavenger Tutorials!"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="CenterAndExpand" 
+                    TextColor="White"
+                    FontSize="Medium"/>
+                
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand">
+                    <Button Margin="0,0,0,0"
+                        Text="Game Page"
+                        HeightRequest="40"
+                        Clicked="GameButtonClicked"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="Black"/>
+                    <Button Margin="0,0,0,0"
+                        Text="Back"
+                        HeightRequest="40"
+                        Clicked="BackButtonClicked"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="Black"/>
+                    <Button Margin="0,0,0,0"
+                        Text="Next"
+                        HeightRequest="40"
+                        Clicked="NextButtonClicked"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="Black"/>
+                </StackLayout>
+
+                <Image Source="{Binding Image}"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

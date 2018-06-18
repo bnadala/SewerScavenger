@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.EditCharacterPage"		     
+             Title="{Binding Title}">
+
+    <!--Show Save and Cancel buttons in the toolbar-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="10" Padding="5">
+
+                <Label Text="Edit Character" FontSize="Small" />
+
+                <!--Display the image related to this entity-->
+                <Image Source="{Binding Data.Image}"
+                WidthRequest="75"
+                HeightRequest="75" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                <Grid>
+                    <!--Define the grid row and column dimensions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Display the Character Name-->
+                    <Label Text="Name" FontSize="Small" Grid.Row="0" Grid.Column="0" />
+                    <Editor Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Text="Image" FontSize="Small" Grid.Row="1" Grid.Column="0" />
+                    <!--Only text entry for images-->
+                    <Editor Text="{Binding Data.Image}" FontSize="Small" Grid.Row="1" Grid.Column="1"/>
+
+                    <!--Display the Character Description-->
+                    <Label Text="Description" FontSize="Small" Grid.Row="2" Grid.Column="0" />
+                    <Editor Text="{Binding Data.Description}" FontSize="Small" Grid.Row="2" Grid.Column="1"/>
+
+                    <!--Display the Character Level-->
+                    <Label Text="Level" FontSize="Small" Grid.Row="3" Grid.Column="0" />
+                    <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Level}" 
+                            HorizontalOptions="Start"
+                            x:Name="LevelValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Level, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Level_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    
+                    <!--Display the Health, Attack, Defense, and Speed with steppers-->
+                    <Label Text="Health" FontSize="Small" Grid.Row="4" Grid.Column="0" />
+                    <StackLayout Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Health}" 
+                            HorizontalOptions="Start"
+                            x:Name="HealthValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Health, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Health_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Label Text="Attack" FontSize="Small" Grid.Row="5" Grid.Column="0" />
+                    <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Attack}" 
+                            HorizontalOptions="Start"
+                            x:Name="AttackValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Attack, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Attack_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Label Text="Defense" FontSize="Small" Grid.Row="6" Grid.Column="0" />
+                    <StackLayout Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Defense}" 
+                            HorizontalOptions="Start"
+                            x:Name="DefenseValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Defense, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Defense_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Label Text="Speed" FontSize="Small" Grid.Row="7" Grid.Column="0" />
+                    <StackLayout Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Speed}" 
+                            HorizontalOptions="Start"
+                            x:Name="SpeedValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Speed, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Speed_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display the Move, Range, and Damage  with steppers-->
+                    <Label Text="Move" FontSize="Small" Grid.Row="8" Grid.Column="0" />
+                    <StackLayout Grid.Row="8" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Move}" 
+                            HorizontalOptions="Start"
+                            x:Name="MoveValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Move, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Move_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Label Text="Range" FontSize="Small" Grid.Row="9" Grid.Column="0" />
+                    <StackLayout Grid.Row="9" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Range}" 
+                            HorizontalOptions="Start"
+                            x:Name="RangeValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Range, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Range_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Label Text="Damage" FontSize="Small" Grid.Row="10" Grid.Column="0" />
+                    <StackLayout Grid.Row="10" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label FontSize="Small"
+                            Text="{Binding Data.Damage}" 
+                            HorizontalOptions="Start"
+                            x:Name="DamageValue"
+                            VerticalOptions="Center"/>
+                        <Stepper Value="{Binding Data.Damage, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Damage_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

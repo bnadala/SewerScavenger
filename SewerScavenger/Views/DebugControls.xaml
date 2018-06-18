@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.DebugControls"
+             xmlns:vm="clr-namespace:SewerScavenger.ViewModels;"
+             xmlns:documents="clr-namespace:Windows.UI.Xaml.Documents;assembly=Windows.Foundation.UniversalApiContract"
+             Title="{Binding Title}" BackgroundColor="Transparent" BackgroundImage="sewerBackground.jpg">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <StackLayout
+        Orientation="Vertical">
+
+            <StackLayout 
+            HorizontalOptions="Center" 
+            VerticalOptions="StartAndExpand"
+            Orientation="Vertical">
+
+                <Label 
+                FontSize="18" TextColor="White"
+                Text="Sewer Scavenger"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label 
+                FontSize="14" TextColor="White"
+                Text="CPSC 5910 WQ18"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label 
+                FontSize="14" TextColor="White"
+                Text="Team Awesome - Bart Nadala, Matthew Supan"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <StackLayout 
+                x:Name="DateRoot" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start"
+                Orientation="Vertical">
+                </StackLayout>
+                <Label 
+                    FontSize="12" TextColor="White"
+                    Text="     In the year 2018, Seattle has been experiencing waves of strange reports of people disappearing mysteriously during Bill Speidel's Underground Tour in Pioneer Square.  In the past few weeks, numerous tourists have reported hearing strange squeaks and growls of various animal noises, yet they have not seen or captured anything on camera to substantiate their claims.  Some of the stragglers on the tour have mysteriously not returned, however.  Many other Seattle tourist traps are fearing their loss of business.  (The Seattle Great Wheel has already lost 9% of its customers.)"
+                    VerticalOptions="StartAndExpand" 
+                    HorizontalOptions="StartAndExpand" />
+                <Label 
+                    FontSize="12" TextColor="White"
+                    Text="     Despite the growing evidence of deadly creatures preying on innocent visitors, city officials have suggested that the noises are most likely the results of gusty winds, creaking structures, and the imaginations of spooked tourists. Nonetheless, in order to appease the masses, the city mayor has appointed a team of the city's top utility workers, pest control specialists, and top sewer-monster academics to investigate these strange occurrences and clean up the city sewers. In this exciting adventure, players step into the shoes of the most unlikely heroes for a chance to save the city from the perilous critters that have been terrorizing the city."
+                    VerticalOptions="StartAndExpand" 
+                    HorizontalOptions="StartAndExpand" />
+            </StackLayout>
+            <StackLayout 
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="FillAndExpand" 
+                Orientation="Vertical">
+                <Grid BackgroundColor="White" Padding="0" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Row="0" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Use Mock DataStore"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="0" Grid.Column="1"
+                        x:Name="UseMockDataSource"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="UseMockDataSourceSwitch_OnToggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="1" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Server Post"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Button  
+                        Grid.Row="1" Grid.Column="1"
+                        Text="Post" 
+                        Clicked="GetItemsPost_Command" 
+                        HorizontalOptions="StartAndExpand"
+                        TextColor="Black" 
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="2" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Disable RNG"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="2" Grid.Column="1"
+                        x:Name="DisableRNG"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="DisableRNG_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="3" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Hit on this Roll"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <StackLayout
+                        Grid.Row="3" Grid.Column="1"
+                        HorizontalOptions="Fill"
+                        Orientation="Horizontal">
+                        <Entry 
+                            x:Name="ToHit"
+                            Text="0"
+                            HorizontalOptions="Start"
+                            VerticalOptions="CenterAndExpand"/>
+                        <Button 
+                            Text="Accept" 
+                            Clicked="ToHitClicked"
+                            HorizontalOptions="Start"
+                            VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <Label 
+                        Grid.Row="4" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Hit on 20"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="4" Grid.Column="1"
+                        x:Name="Hit20"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="Hit20_Toggled"
+                        IsToggled="True"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="5" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Critical Hit on 20"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="5" Grid.Column="1"
+                        x:Name="Critical20"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="Critical20_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="6" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Miss on 1"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="6" Grid.Column="1"
+                        x:Name="Miss1"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="Miss1_Toggled"
+                        IsToggled="True"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="7" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Critical Miss on 1"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="7" Grid.Column="1"
+                        x:Name="CriticalMiss1"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="CriticalMiss1_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="8" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Mass Volcano"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="8" Grid.Column="1"
+                        x:Name="MassVolcano"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="MassVolcano_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="9" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Health Potions"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="9" Grid.Column="1"
+                        x:Name="HealthPotions"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="HealthPotions_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="10" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Focused Attack"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="10" Grid.Column="1"
+                        x:Name="FocusedAttack"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="FocusedAttack_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="11" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Mostly Dead"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="11" Grid.Column="1"
+                        x:Name="MostlyDead"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="MostlyDead_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label 
+                        Grid.Row="12" Grid.Column="0"
+                        FontSize="14" TextColor="Black"
+                        Text="Auto Battle Text"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Switch 
+                        Grid.Row="12" Grid.Column="1"
+                        x:Name="Auto"
+                        HorizontalOptions="StartAndExpand"
+                        Toggled="Auto_Toggled"
+                        IsToggled="False"
+                        VerticalOptions="CenterAndExpand"/>
+                </Grid>
+                <Button Text="Close Debug Controls" TextColor="White" Clicked="DebugPanelClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

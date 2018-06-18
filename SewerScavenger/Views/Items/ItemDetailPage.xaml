@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.ItemDetailPage"
+             Title="{Binding Title}">
+
+<!--Show Edit, Delete, and Cancel buttons in the toolbar-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout 
+            x:Name="DetailsRoot"
+            Orientation="Vertical"
+            Spacing="20"
+            Padding="15">
+
+            <Label Text="Items Detail Page" FontSize="Medium" />
+
+            <!--Display image of item-->
+            <Image Source="{Binding Data.ImageURI}"
+                WidthRequest="150"
+                HeightRequest="150" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <!--Display Name of item-->
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Start">
+                <Label Text="Name : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+                <Label Text="{Binding Data.Name}" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!--Display description of item-->
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Start">
+                <Label Text="Description : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+                <Label Text="{Binding Data.Description}" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!--Display Range of item-->
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Start">
+                <Label Text="Range : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+                <Label Text="{Binding Data.Range}" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!--Display value of item-->
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Start">
+                <Label Text="Value : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+                <Label Text="{Binding Data.Value}" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!--Display location of item-->
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Start">
+                <Label Text="Location : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+                <Label Text="{Binding Data.Location}" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!--Display attribute of item-->
+            <StackLayout 
+                Orientation="Horizontal" 
+                HorizontalOptions="Start">
+            <Label Text="Attribute : " 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start"/>
+            <Label Text="{Binding Data.Attribute}" 
+                   FontSize="Medium" 
+                   HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

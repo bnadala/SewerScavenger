@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.PickCharacter"
+             Title="Pick Your Characters">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Start Game"
+                VerticalOptions="Center" 
+                HorizontalOptions="End"
+                Clicked="StartGameButtonClick"
+                Grid.Row="0" Grid.Column="0"/>
+            <Button Text="Auto Play"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                Clicked="AutoPlayButtonClick"
+                Grid.Row="0" Grid.Column="1"/>
+
+            <StackLayout Grid.Row="1" Grid.Column="0">
+                <Label Text="Character List"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"/>
+                <ListView x:Name="MyListView"
+                    ItemsSource="{Binding Dataset}"
+                    ItemTapped="AddCharacterToParty"
+                    CachingStrategy="RecycleElement"
+                    RowHeight="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="0">
+                                    <Label Text="{Binding Name}" 
+                                        LineBreakMode="NoWrap" 
+                                        Style="{DynamicResource ListItemTextStyle}" 
+                                        FontSize="14"/>
+                                    <Image Source="{Binding Image}"
+                                        HeightRequest="50"/>
+                                    <Grid RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="Level" FontSize="12" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Level}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="0" Grid.Column="1"/>
+                                        <Label Text="Health" FontSize="12" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Health}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="1" Grid.Column="1"/>
+                                        <Label Text="Attack" FontSize="12" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Attack}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="2" Grid.Column="1"/>
+                                        <Label Text="Defense" FontSize="12" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Defense}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="3" Grid.Column="1"/>
+                                        <Label Text="Speed" FontSize="12" Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Speed}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="4" Grid.Column="1"/>
+                                        <Label Text="Range" FontSize="12" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Range}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="5" Grid.Column="1"/>
+                                        <Label Text="Moves" FontSize="12" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Move}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="6" Grid.Column="1"/>
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Grid.Column="1">
+                <Label Text="Party List"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"/>
+                <ListView x:Name="PartyList"
+                    ItemTapped="RemoveCharacterFromParty"
+                    CachingStrategy="RecycleElement"
+                    RowHeight="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="0">
+                                    <Label Text="{Binding Name}" 
+                                        LineBreakMode="NoWrap" 
+                                        Style="{DynamicResource ListItemTextStyle}" 
+                                        FontSize="14"/>
+                                    <Image Source="{Binding Image}"
+                                        HeightRequest="50"/>
+                                    <Grid RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="Level" FontSize="12" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Level}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="0" Grid.Column="1"/>
+                                        <Label Text="Health" FontSize="12" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Health}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="1" Grid.Column="1"/>
+                                        <Label Text="Attack" FontSize="12" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Attack}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="2" Grid.Column="1"/>
+                                        <Label Text="Defense" FontSize="12" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Defense}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="3" Grid.Column="1"/>
+                                        <Label Text="Speed" FontSize="12" Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Speed}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="4" Grid.Column="1"/>
+                                        <Label Text="Range" FontSize="12" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Range}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="5" Grid.Column="1"/>
+                                        <Label Text="Moves" FontSize="12" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Move}" 
+                                            HorizontalTextAlignment="Center"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="12" 
+                                            Grid.Row="6" Grid.Column="1"/>
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

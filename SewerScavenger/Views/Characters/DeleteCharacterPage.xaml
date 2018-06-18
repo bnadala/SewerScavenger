@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.DeleteCharacterPage"
+            Title="{Binding Title}">
+
+<!--Show Delete and Cancel buttons in the toolbar-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Grid>
+            <!--Define the grid row and column dimensions-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--Display the Character Name-->
+            <Label Text="Name" FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+
+            <!--Display the image related to this entity-->
+            <Image Source="{Binding Data.Image}" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand"/>
+
+            <!--Display the Character Description-->
+            <Label Text="Description:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="{Binding Data.Description}" FontSize="Small" Grid.Row="3" Grid.ColumnSpan="3"/>
+
+
+            <!--Display the current Health, Attack, Defense, and Speed-->
+            <Label Text="Health:" FontSize="Small" Grid.Row="4" Grid.Column="1"/>
+            <Label Text="{Binding Data.Health}" FontSize="Small" Grid.Row="4" Grid.Column="2"/>
+            <Label Text="Attack:" FontSize="Small" Grid.Row="5" Grid.Column="1"/>
+            <Label Text="{Binding Data.Attack}" FontSize="Small" Grid.Row="5" Grid.Column="2"/>
+            <Label Text="Defense:" FontSize="Small" Grid.Row="6" Grid.Column="1"/>
+            <Label Text="{Binding Data.Defense}" FontSize="Small" Grid.Row="6" Grid.Column="2"/>
+            <Label Text="Speed:" FontSize="Small" Grid.Row="7" Grid.Column="1"/>
+            <Label Text="{Binding Data.Speed}" FontSize="Small" Grid.Row="7" Grid.Column="2"/>
+
+            <!--Display the Character Level-->
+            <Label Text="Level:" FontSize="Small" Grid.Row="8" Grid.Column="1"/>
+            <Label Text="{Binding Data.Level}" FontSize="Small" Grid.Row="8" Grid.Column="2"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

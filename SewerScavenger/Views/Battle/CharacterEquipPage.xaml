@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.CharacterEquipPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Name" FontSize="14" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding Data.Name}" FontSize="14" Grid.Row="0" Grid.Column="1"/>
+                    <Button Text="Go Back" Clicked="Go_Back_Clicked" Grid.Row="0" Grid.Column="2"/>
+                    <Image Source="{Binding Data.Image}" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" HeightRequest="100"/>
+                    <Label Text="Description:" FontSize="14" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding Data.Description}" FontSize="14" Grid.Row="3" Grid.ColumnSpan="3"/>
+                    <Label Text="Level:" FontSize="14" Grid.Row="4" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Level}" FontSize="14" Grid.Row="4" Grid.Column="2"/>
+                    <Label Text="Health:" FontSize="14" Grid.Row="5" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Health}" FontSize="14" Grid.Row="5" Grid.Column="2"/>
+                    <Label Text="Attack:" FontSize="14" Grid.Row="6" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Attack}" FontSize="14" Grid.Row="6" Grid.Column="2"/>
+                    <Label Text="Defense:" FontSize="14" Grid.Row="7" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Defense}" FontSize="14" Grid.Row="7" Grid.Column="2"/>
+                    <Label Text="Speed:" FontSize="14" Grid.Row="8" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Speed}" FontSize="14" Grid.Row="8" Grid.Column="2"/>
+                    <Label Text="Move:" FontSize="14" Grid.Row="9" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Move}" FontSize="14" Grid.Row="9" Grid.Column="2"/>
+                    <Label Text="Range:" FontSize="14" Grid.Row="10" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Range}" FontSize="14" Grid.Row="10" Grid.Column="2"/>
+                    <Label Text="Damage:" FontSize="14" Grid.Row="11" Grid.Column="1"/>
+                    <Label Text="{Binding Data.Damage}" FontSize="14" Grid.Row="11" Grid.Column="2"/>
+                    <Label Text="Intentory:" FontSize="14" Grid.Row="14" Grid.Column="0"/>
+                    <Label Text="Click left item to unequip." FontSize="14" Grid.Row="12" Grid.Column="1"/>
+                    <Label Text="Click right item to equip" FontSize="14" Grid.Row="12" Grid.Column="2"/>
+                </Grid>
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="1195" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Text="Location" FontSize="12" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="Currently Equipped" FontSize="12" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Inventory Per Location" FontSize="12" Grid.Row="0" Grid.Column="2"/>
+                    
+                    <Grid Grid.Row="1" Grid.Column="0" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Head:" FontSize="12" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Necklace:" FontSize="12" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="Feet:" FontSize="12" Grid.Row="2" Grid.Column="0"/>
+                        <Label Text="Primary:" FontSize="12" Grid.Row="3" Grid.Column="0"/>
+                        <Label Text="Off Hand:" FontSize="12" Grid.Row="4" Grid.Column="0"/>
+                        <Label Text="Left Finger:" FontSize="12" Grid.Row="5" Grid.Column="0"/>
+                        <Label Text="Right Finger:" FontSize="12" Grid.Row="6" Grid.Column="0"/>
+                    </Grid>
+                    <StackLayout Grid.Row="1" Grid.Column="1" Spacing="0" Padding="0">
+                        <ListView x:Name="InventoryListView" 
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected"
+                            RowHeight="130">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                            <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                            <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                            <Grid RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <Grid Grid.Row="1" Grid.Column="2" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                            <RowDefinition Height="130" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView0" 
+                                VerticalOptions="FillAndExpand"
+                                HasUnevenRows="true"
+                                CachingStrategy="RecycleElement"
+                                ItemSelected="ItemSelected0"
+                                RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Spacing="0" Padding="0"
+                                                 Orientation="Vertical"
+                                                 VerticalOptions="Start"
+                                                 HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                    LineBreakMode="NoWrap" 
+                                                    Style="{DynamicResource ListItemTextStyle}" 
+                                                    FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                                   WidthRequest="50"
+                                                   HeightRequest="50" 
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12"
+                                                        Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12" 
+                                                        Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12" 
+                                                        Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12" 
+                                                        Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12" 
+                                                        Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                        LineBreakMode="NoWrap"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        FontSize="12" 
+                                                        Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView1" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected1"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout  Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView2" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected2"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout  Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView3" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected3"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView4" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected4"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout  Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView5" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected5"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Spacing="0" Padding="0">
+                            <ListView x:Name="InventoryListView6" 
+                            VerticalOptions="FillAndExpand"
+                            HasUnevenRows="true"
+                            CachingStrategy="RecycleElement"
+                            ItemSelected="ItemSelected6"
+                            RowHeight="130">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout  Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                                <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                                    <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                                    <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

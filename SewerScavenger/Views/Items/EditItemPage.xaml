@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.EditItemPage"		     
+             xmlns:local="using:SewerScavenger.Models"
+             Title="{Binding Title}">
+
+    <!--Show Save and Cancel buttons in the toolbar-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:StringEnumConverter x:Key="StringEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+
+                <Label Text="Item Edit Page" FontSize="Small" />
+
+                <!--Display image of item-->
+                <Image Source="{Binding Data.ImageURI}"
+                WidthRequest="75"
+                HeightRequest="75" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+                <Grid
+                    RowSpacing="1"
+                    ColumnSpacing="2"
+                    VerticalOptions="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Display Name of item-->
+                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <Label 
+                            Text="Name" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry 
+                            Text="{Binding Data.Name}" 
+                            FontSize="Small" 
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Description of item-->
+                    <StackLayout Grid.Row="1" Grid.Column="0">
+                        <Label 
+                            Text="Description" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1">
+                        <Entry 
+                            Text="{Binding Data.Description}" 
+                            FontSize="Small" 
+                            Margin="0" 
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Range of item with stepper-->
+                    <StackLayout Grid.Row="2" Grid.Column="0">
+                        <Label 
+                            Text="Range" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label 
+                            Text="{Binding Data.Range}" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            x:Name="RangeValue"
+                            VerticalOptions="Center"/>
+
+                        <Stepper 
+                            Value="{Binding Data.Range, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Range_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Value of item with stepper-->
+                    <StackLayout Grid.Row="3" Grid.Column="0">
+                        <Label 
+                            Text="Value"
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <Label 
+                            Text="{Binding Data.Value}" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            x:Name="ValueValue"
+                            VerticalOptions="Center"/>
+
+                        <Stepper Value="{Binding Data.Value, Mode=TwoWay}"
+                            Minimum="0"
+                            Maximum="20"
+                            Increment="1"
+                            ValueChanged="Value_OnStepperValueChanged"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Location of item-->
+                    <StackLayout Grid.Row="4" Grid.Column="0">
+                        <Label 
+                            Text="Location" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="4" Grid.Column="1">
+                        <Picker 
+                            ItemsSource="{x:Static local:ItemLocationList.GetListItem}" 
+                            SelectedItem="{Binding Data.Location, Converter={StaticResource StringEnum}, Mode=TwoWay}" 
+                            x:Name="LocationPicker" 
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Attribute of item-->
+                    <StackLayout Grid.Row="5" Grid.Column="0">
+                        <Label 
+                            Text="Attribute" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="5" Grid.Column="1">
+                        <Picker 
+                            ItemsSource="{x:Static local:AttributeList.GetListItem}" 
+                            SelectedItem="{Binding Data.Attribute, Converter={StaticResource StringEnum}, Mode=TwoWay}" 
+                            x:Name="AttributePicker"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <!--Display Image string of item-->
+                    <StackLayout Grid.Row="6" Grid.Column="0">
+                        <Label 
+                            Text="Image" 
+                            FontSize="Medium" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Image Source="{Binding Data.ImageURI}"
+                            WidthRequest="25"
+                            HeightRequest="25" 
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"/>
+                        <Entry 
+                            Text="{Binding Data.ImageURI}" 
+                            FontSize="Small" 
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Center"/>
+
+                    </StackLayout>
+                </Grid>
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+
+</ContentPage>

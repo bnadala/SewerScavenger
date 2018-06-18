@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.CharacterDetails">
+    <ScrollView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Name" FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+
+                <!--Bind the image for the data-->
+                <Image Source="{Binding Data.Image}" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand"/>
+
+                <Label Text="Description:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding Data.Description}" FontSize="Small" Grid.Row="3" Grid.ColumnSpan="3"/>
+                <Label Text="Level:" FontSize="Small" Grid.Row="4" Grid.Column="1"/>
+                <Label Text="{Binding Data.Level}" FontSize="Small" Grid.Row="4" Grid.Column="2"/>
+                <Label Text="Experience:" FontSize="Small" Grid.Row="5" Grid.Column="1"/>
+                <Label Text="{Binding Data.XP}" FontSize="Small" Grid.Row="5" Grid.Column="2"/>
+                <Label Text="Health:" FontSize="Small" Grid.Row="6" Grid.Column="1"/>
+                <Label Text="{Binding Data.Health}" FontSize="Small" Grid.Row="6" Grid.Column="2"/>
+                <Label Text="Attack:" FontSize="Small" Grid.Row="7" Grid.Column="1"/>
+                <Label Text="{Binding Data.Attack}" FontSize="Small" Grid.Row="7" Grid.Column="2"/>
+                <Label Text="Defense:" FontSize="Small" Grid.Row="8" Grid.Column="1"/>
+                <Label Text="{Binding Data.Defense}" FontSize="Small" Grid.Row="8" Grid.Column="2"/>
+                <Label Text="Speed:" FontSize="Small" Grid.Row="9" Grid.Column="1"/>
+                <Label Text="{Binding Data.Speed}" FontSize="Small" Grid.Row="9" Grid.Column="2"/>
+                <Label Text="Move:" FontSize="Small" Grid.Row="10" Grid.Column="1"/>
+                <Label Text="{Binding Data.Move}" FontSize="Small" Grid.Row="10" Grid.Column="2"/>
+                <Label Text="Range:" FontSize="Small" Grid.Row="11" Grid.Column="1"/>
+                <Label Text="{Binding Data.Range}" FontSize="Small" Grid.Row="11" Grid.Column="2"/>
+                <Label Text="Damage:" FontSize="Small" Grid.Row="12" Grid.Column="1"/>
+                <Label Text="{Binding Data.Damage}" FontSize="Small" Grid.Row="12" Grid.Column="2"/>
+                <Label Text="Intentory:" FontSize="Small" Grid.Row="13" Grid.Column="0"/>
+            </Grid>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1195" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="130" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Head:" FontSize="Small" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Necklace:" FontSize="Small" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Feet:" FontSize="Small" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Primary Hand:" FontSize="Small" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Off Hand:" FontSize="Small" Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Left Finger:" FontSize="Small" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Right Finger:" FontSize="Small" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="End"/>
+                </Grid>
+                <StackLayout Grid.Row="0" Grid.Column="1" Spacing="0" Padding="0">
+                    <ListView x:Name="InventoryListView" 
+                            CachingStrategy="RecycleElement"
+                            RowHeight="130">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Spacing="0" Padding="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="Start">
+                                        <Label Text="{Binding Name}" 
+                                                LineBreakMode="NoWrap" 
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14" />
+                                        <Image Source="{Binding ImageURI}"
+                                               WidthRequest="50"
+                                               HeightRequest="50" 
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding Attribute}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12"
+                                                    Grid.Row="0" Grid.Column="0"/>
+                                            <Label Text="{Binding Value}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="0" Grid.Column="1"/>
+                                            <Label Text="Range" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="0"/>
+                                            <Label Text="{Binding Range}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="1" Grid.Column="1"/>
+                                            <Label Text="Damage" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="0"/>
+                                            <Label Text="{Binding Damage}" 
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                                    FontSize="12" 
+                                                    Grid.Row="2" Grid.Column="1"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

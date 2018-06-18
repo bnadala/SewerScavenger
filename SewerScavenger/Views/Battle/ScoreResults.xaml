@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SewerScavenger.Views.ScoreResults">
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Game Score" FontSize="Small" HorizontalOptions="Center"/>
+                <Button Text="New Game" Clicked="New_Game_Clicked" HorizontalOptions="Center"/>
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Name: " FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="{Binding Data.Name}" FontSize="Small" Grid.Row="0" Grid.Column="1"/>
+
+                <Label Text="Score: " FontSize="Small" Grid.Row="1" Grid.Column="0"/>
+                <Label Text="{Binding Data.ScoreTotal}" FontSize="Small" Grid.Row="1" Grid.Column="1"/>
+
+                <Label Text="Game Date:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding Data.GameDate}" FontSize="Small" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Text="AutoBattle:" FontSize="Small" Grid.Row="3" Grid.Column="0"/>
+                <Label Text="{Binding Data.AutoBattle}" FontSize="Small" Grid.Row="3" Grid.Column="1"/>
+
+                <Label Text="Number of Turns:" FontSize="Small" Grid.Row="4" Grid.Column="0"/>
+                <Label Text="{Binding Data.TurnNumber}" FontSize="Small" Grid.Row="4" Grid.Column="1"/>
+
+                <Label Text="Number of Monsters Slain:" FontSize="Small" Grid.Row="5" Grid.Column="0"/>
+                <Label Text="{Binding Data.MonsterSlainNumber}" FontSize="Small" Grid.Row="5" Grid.Column="1"/>
+
+                <Label Text="Total Experience Gained:" FontSize="Small" Grid.Row="6" Grid.Column="0"/>
+                <Label Text="{Binding Data.ExperienceGainedTotal}" FontSize="Small" Grid.Row="6" Grid.Column="1"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="125" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Characters at Death:" FontSize="Small" Grid.Row="0" Grid.Column="0"/>
+                <ScrollView Grid.Row="1" Grid.Column="0">
+                    <StackLayout Spacing="0" Padding="0">
+                        <ListView x:Name="CharacterList"
+                            ItemTapped="CharacterDetails"
+                            CachingStrategy="RecycleElement"
+                            RowHeight="20">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}" 
+                                        FontSize="15" />
+                                            <Label Text=", Level:" 
+                                        FontSize="15" />
+                                            <Label Text="{Binding Level}" 
+                                        FontSize="15" />
+                                            <Label Text=", Experience:" 
+                                        FontSize="15" />
+                                            <Label Text="{Binding XP}" 
+                                        FontSize="15" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+
+                <Label Text="Monsters Killed:" FontSize="Small" Grid.Row="2" Grid.Column="0"/>
+                <ScrollView Grid.Row="3" Grid.Column="0">
+                    <StackLayout Spacing="0" Padding="0">
+                        <ListView x:Name="MonsterList"
+                          ItemTapped="MonsterDetails"
+                    CachingStrategy="RecycleElement"
+                    RowHeight="20">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}" 
+                                        FontSize="15" />
+                                            <Label Text=", Level:" 
+                                        FontSize="15" />
+                                            <Label Text="{Binding Level}" 
+                                        FontSize="15" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+
+                <Label Text="Items Dropped:" FontSize="Small" Grid.Row="4" Grid.Column="0"/>
+                <ScrollView Grid.Row="5" Grid.Column="0">
+                    <StackLayout Spacing="0" Padding="0">
+                        <ListView x:Name="ItemList"
+                              ItemTapped="ItemDetails"
+                        CachingStrategy="RecycleElement"
+                        RowHeight="20">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}" 
+                                            FontSize="15" />
+                                            <Label Text="," 
+                                            FontSize="15" />
+                                            <Label Text="{Binding Attribute}" 
+                                            FontSize="15" />
+                                            <Label Text=":" 
+                                            FontSize="15" />
+                                            <Label Text="{Binding Value}" 
+                                            FontSize="15" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+
+                <Label Text="Battle Text:" FontSize="Small" Grid.Row="6" Grid.Column="0"/>
+                <ScrollView Grid.Row="7" Grid.Column="0">
+                    <StackLayout Spacing="0" Padding="0" >
+                        <ListView x:Name="ScoreList"
+                            CachingStrategy="RecycleElement"
+                            RowHeight="18">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Text}" 
+                                        FontSize="13" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
